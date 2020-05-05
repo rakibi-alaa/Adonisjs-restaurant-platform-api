@@ -11,7 +11,7 @@
 */
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
-const Factory = use('Factory');
+//const Factory = use('Factory');
 const User = use('App/Models/User');
 const Role = use('Adonis/Acl/Role');
 
