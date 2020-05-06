@@ -11,7 +11,7 @@
 */
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
-//const Factory = use('Factory');
+const Factory = use('Factory');
 const User = use('App/Models/User');
 const Role = use('Adonis/Acl/Role');
 
@@ -20,7 +20,7 @@ class UserSeeder {
 
   async run(){
 
-  const roleAdmin = new Role()
+  /*const roleAdmin = new Role()
   roleAdmin.name = 'Admin'
   roleAdmin.slug = 'admin'
   roleAdmin.description = 'manage administration privileges'
@@ -45,7 +45,7 @@ class UserSeeder {
   await customer.save()
 
   await admin.roles().attach([roleAdmin.id])
-  await customer.roles().attach([roleCustomer.id])
+  await customer.roles().attach([roleCustomer.id])*/
 
 
   }

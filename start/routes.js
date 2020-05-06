@@ -20,5 +20,7 @@ Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
 })
 
+//middleware(['auth', 'is:(customer) && !admin'])
+
 
 Route.post('/login','AuthController.login')
