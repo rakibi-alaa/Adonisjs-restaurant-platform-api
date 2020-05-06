@@ -20,33 +20,14 @@ class UserSeeder {
 
   async run(){
 
-  /*const roleAdmin = new Role()
-  roleAdmin.name = 'Admin'
-  roleAdmin.slug = 'admin'
-  roleAdmin.description = 'manage administration privileges'
-  await roleAdmin.save()
+  const adminRole = await Factory.model('Adonis/Acl/Role').create({ name: 'Admin' ,slug : 'admin',description : 'manage administration privileges'});
+  const customerRole = await Factory.model('Adonis/Acl/Role').create({ name: 'Customer' ,slug : 'customer',description : 'manage customer privileges'});
 
-  const roleCustomer = new Role()
-  roleCustomer.name = 'Customer'
-  roleCustomer.slug = 'customer'
-  roleCustomer.description = 'manage customer privileges'
-  await roleCustomer.save()
+  const admin = await Factory.model('App/Models/User').create({ username: 'Admin' ,email : 'admin@mail.com',password : 'admin@mail.com'});
+  const customer = await Factory.model('App/Models/User').create({ username: 'Customer' ,email : 'customer@mail.com',password : 'customer@mail.com'});
 
-  const admin = new User()
-  admin.username = 'Admin'
-  admin.email = 'admin@mail.com'
-  admin.password = 'admin@mail.com'
-  await admin.save()
-
-  const customer = new User()
-  customer.username = 'Customer'
-  customer.email = 'customer@mail.com'
-  customer.password = 'customer@mail.com'
-  await customer.save()
-
-  await admin.roles().attach([roleAdmin.id])
-  await customer.roles().attach([roleCustomer.id])*/
-
+  await admin.roles().attach([adminRole.id]);
+  await customer.roles().attach([customerRole.id])
 
   }
 }

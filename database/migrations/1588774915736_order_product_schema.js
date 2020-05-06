@@ -9,9 +9,9 @@ class OrderProductSchema extends Schema {
       table.increments();
       table.integer('order_id').unsigned().references('id').inTable('orders').onDelete('SET NULL');
       table.integer('product_id').unsigned().references('id').inTable('products').onDelete('SET NULL');
-      table.string('pruduct_title');
-      table.string('pruduct_quantity');
-      table.string('pruduct_price');
+      table.string('product_title');
+      table.string('product_quantity');
+      table.string('product_price');
       table.timestamps()
     })
   }

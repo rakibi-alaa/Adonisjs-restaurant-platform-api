@@ -13,9 +13,8 @@
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
   const Factory = use('Factory');
-  const User = use('App/Models/User')
-  const Restaurant = use('App/Models/Restaurant')
-
+  const Hash = use('Hash');
+const User = use('App/Models/User')
 
   Factory.blueprint('App/Models/User', async (faker, i, data) => {
     return {
@@ -28,13 +27,14 @@
   Factory.blueprint('Adonis/Acl/Role', (faker, i, data) => {
     return {
       slug: data.slug,
-      name: data.data.name,
+      name: data.name,
       description : data.description
     }
   });
 
-  Factory.blueprint('App/Models/Restaurant', async (faker) => {
-    const user = await User.first();
+  Factory.blueprint('App/Models/Restaurant',  async (faker,i,data) => {
+
+
     return {
       name: faker.word(),
       email : faker.email(),
@@ -42,29 +42,26 @@
       phone : faker.phone({ country: "fr" }),
       allow_ordering : faker.bool(),
       allow_reserving : faker.bool(),
-      created_by : user.id,
+      created_by : data.user_id,
     }
   });
 
 
-  Factory.blueprint('App/Models/Product', async (faker) => {
-    const user = await User.first();
+  Factory.blueprint('App/Models/Product',  (faker,i,data) => {
     return {
       title: faker.word(),
       description : faker.email(),
       price : faker.floating({ min: 0, max: 100, fixed: 8 }),
-      created_by : user.id,
+      created_by : data.user_id,
     }
   });
 
-Factory.blueprint('App/Models/Order', async (faker) => {
-  const user = await User.first();
-  const restaurant = await Restaurant.first();
-  return {
-    cutomer_full_name:  faker.prefix()+ faker.name({ nationality: 'en' }),
-    cutomer_email : faker.email(),
-    cutomer_phone: faker.phone({ country: "fr" }),
-    placed_by : user.id,
-    restaurant_id : restaurant.id
-  }
-});
+  Factory.blueprint('App/Models/Order', (faker,i,data) => {
+    return {
+      cutomer_full_name:  faker.prefix()+ faker.name({ nationality: 'en' }),
+      cutomer_email : faker.email(),
+      cutomer_phone: faker.phone({ country: "fr" }),
+      placed_by : data.user_id,
+      restaurant_id : data.restaurant_id
+    }
+  });
