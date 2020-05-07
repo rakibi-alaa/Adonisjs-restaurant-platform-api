@@ -23,4 +23,13 @@ Route.get('/', () => {
 //middleware(['auth', 'is:(customer) && !admin'])
 
 
-Route.post('/login','AuthController.login')
+
+Route.post('/auth/login','AuthController.login');
+
+Route.group(() => {
+  Route.post('/register', 'AuthController.register');
+  Route.get('/restaurant', 'RestaurantController.index');
+  Route.get('/orders', 'OrderController.index');
+  Route.get('/products', 'ProductController.index');
+
+}).namespace('Admin').prefix('admin').middleware(['auth', 'is:admin']);

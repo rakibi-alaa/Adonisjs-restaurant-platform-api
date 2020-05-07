@@ -39,6 +39,14 @@ class User extends Model {
    *
    * @return {Object}
    */
+  restaurant(){
+    return this.hasOne('App/Models/Restaurant')
+  }
+
+  orders(){
+    return this.hasMany('App/Models/Order')
+  }
+
   tokens () {
     return this.hasMany('App/Models/Token')
   }
