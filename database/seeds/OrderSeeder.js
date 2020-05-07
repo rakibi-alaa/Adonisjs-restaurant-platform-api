@@ -16,7 +16,6 @@ const User = use('App/Models/User')
 const Restaurant = use('App/Models/Restaurant')
 const Order = use('App/Models/Order')
 const Product = use('App/Models/Product')
-const Database = use('Database')
 
 
 class OrderSeeder {
@@ -24,18 +23,16 @@ class OrderSeeder {
     const user = await User.first();
     const restaurant = await Restaurant.first();
 
-    const orders = await Factory.model('App/Models/Order').createMany(1,{user_id : user.id,restaurant_id : restaurant.id});
+    await Factory.model('App/Models/Order').createMany(1,{user_id : user.id,restaurant_id : restaurant.id});
 
-    const order = await Order.first();
+    const order = await Order.last();
     const product = await Product.first();
 
-
-
-    await Database.table('order_product').where('order_id', order.id).where('product_id', product.id).update({
-        product_title: product.title,
-        product_quantity: 2,
-        product_price : product.price
-      })
+    await order.products().attach(product.id,(order_product) => {
+      order_product.product_title = product.title;
+      order_product.product_quantity = 2;
+      order_product.product_price = product.price;
+    });
 
   }
 }

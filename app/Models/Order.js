@@ -11,7 +11,7 @@ class Order extends Model {
   }
 
   products(){
-    return this.belongsToMany('App/Models/Product').withPivot(['pruduct_title','pruduct_quantity','pruduct_price']).withTimestamps();
+    return this.belongsToMany('App/Models/Product').withPivot(['product_title','product_quantity','product_price']).withTimestamps();
   }
 
   restaurant(){
