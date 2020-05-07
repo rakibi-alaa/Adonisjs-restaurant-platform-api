@@ -27,7 +27,7 @@ Route.get('/', () => {
 Route.post('/auth/login','AuthController.login');
 
 Route.group(() => {
-  Route.post('/register', 'AuthController.register');
+  Route.post('/register', 'AuthController.register').validator('StoreUser');
   Route.get('/restaurant', 'RestaurantController.index');
   Route.get('/orders', 'OrderController.index');
   Route.get('/products', 'ProductController.index');
