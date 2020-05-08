@@ -38,6 +38,7 @@
       name: faker.word(),
       email : faker.email(),
       description : faker.email(),
+      address : faker.address(),
       phone : faker.phone({ country: "fr" }),
       allow_ordering : faker.bool(),
       allow_reserving : faker.bool(),

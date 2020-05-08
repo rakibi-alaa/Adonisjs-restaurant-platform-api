@@ -32,5 +32,8 @@ Route.group(() => {
   Route.patch('/restaurant', 'RestaurantController.update');
   Route.get('/orders', 'OrderController.index');
   Route.get('/products', 'ProductController.index');
+  Route.post('/products', 'ProductController.store');
+  Route.patch('/products', 'ProductController.update');
+  Route.delete('/products', 'ProductController.delete');
 
 }).namespace('Admin').prefix('api/v1/admin').middleware(['auth', 'is:admin']);

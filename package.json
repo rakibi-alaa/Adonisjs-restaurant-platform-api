@@ -27,6 +27,7 @@
     "@adonisjs/validator": "^5.0.6",
     "@radmen/adonis-lucid-soft-deletes": "^0.2.0",
     "adonis-acl": "^1.1.1",
+    "adonis-bumblebee": "^2.2.0",
     "mysql": "^2.18.1"
   },
   "devDependencies": {},

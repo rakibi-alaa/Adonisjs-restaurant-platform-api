@@ -47,6 +47,10 @@ class User extends Model {
     return this.hasMany('App/Models/Order')
   }
 
+  products(){
+    return this.hasMany('App/Models/Product')
+  }
+
   tokens () {
     return this.hasMany('App/Models/Token')
   }

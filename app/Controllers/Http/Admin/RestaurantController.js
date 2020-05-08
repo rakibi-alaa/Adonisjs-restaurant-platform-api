@@ -1,9 +1,21 @@
 'use strict'
 
+const RestaurantService = use('App/Services/RestaurantService')
+
 class RestaurantController {
-  async index({request,response,auth}){
-    return response.json(await auth.user.restaurant().fetch())
+
+  async index(ctx){
+    const restaurant = await RestaurantService.adminRestaurant(ctx);
+
+    return ctx.transform.item(restaurant,'RestaurantTransformer');
   }
+
+  async update(ctx){
+    const restaurant = await RestaurantService.update(ctx);
+
+    return ctx.response.json(restaurant);
+  }
+
 }
 
-module.exports = RestaurantController
+module.exports = RestaurantController;

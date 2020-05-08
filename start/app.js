@@ -19,6 +19,7 @@ const providers = [
   'adonis-acl/providers/AclProvider',
   '@radmen/adonis-lucid-soft-deletes/providers/SoftDeletesProvider',
   '@adonisjs/validator/providers/ValidatorProvider',
+  'adonis-bumblebee/providers/BumblebeeProvider',
 ]
 
 /*
@@ -33,6 +34,7 @@ const providers = [
 const aceProviders = [
   '@adonisjs/lucid/providers/MigrationsProvider',
   'adonis-acl/providers/CommandsProvider',
+  'adonis-bumblebee/providers/CommandsProvider',
 ]
 
 /*
