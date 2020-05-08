@@ -29,7 +29,8 @@ Route.post('/auth/login','AuthController.login');
 Route.group(() => {
   Route.post('/register', 'AuthController.register').validator('StoreUser');
   Route.get('/restaurant', 'RestaurantController.index');
+  Route.patch('/restaurant', 'RestaurantController.update');
   Route.get('/orders', 'OrderController.index');
   Route.get('/products', 'ProductController.index');
 
-}).namespace('Admin').prefix('admin').middleware(['auth', 'is:admin']);
+}).namespace('Admin').prefix('api/v1/admin').middleware(['auth', 'is:admin']);

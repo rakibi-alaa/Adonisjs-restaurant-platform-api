@@ -10,7 +10,7 @@ class ProductSchema extends Schema {
       table.string('title');
       table.string('description');
       table.string('price');
-      table.integer('created_by').unsigned().references('id').inTable('users');
+      table.integer('user_id').unsigned().references('id').inTable('users');
       table.timestamps();
       table.timestamp('deleted_at')
     })

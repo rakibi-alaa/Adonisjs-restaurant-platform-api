@@ -41,7 +41,7 @@
       phone : faker.phone({ country: "fr" }),
       allow_ordering : faker.bool(),
       allow_reserving : faker.bool(),
-      created_by : data.user_id,
+      user_id : data.user_id,
     }
   });
 
@@ -50,8 +50,8 @@
     return {
       title: faker.word(),
       description : faker.email(),
-      price : faker.floating({ min: 0, max: 100, fixed: 8 }),
-      created_by : data.user_id,
+      price : faker.floating({ min: 0, max: 100, fixed: 2 }),
+      user_id : data.user_id,
     }
   });
 
@@ -60,7 +60,7 @@
       customer_full_name:  faker.prefix()+ faker.name({ nationality: 'en' }),
       customer_email : faker.email(),
       customer_phone: faker.phone({ country: "fr" }),
-      placed_by : data.user_id,
+      user_id : data.user_id,
       restaurant_id : data.restaurant_id
     }
   });

@@ -14,7 +14,7 @@ class RestaurantSchema extends Schema {
       table.string('phone');
       table.boolean('allow_ordering');
       table.boolean('allow_reserving');
-      table.integer('created_by').unsigned().references('id').inTable('users');
+      table.integer('user_id').unsigned().references('id').inTable('users');
       table.timestamps();
       table.timestamp('deleted_at')
     })
