@@ -28,6 +28,7 @@
     "@radmen/adonis-lucid-soft-deletes": "^0.2.0",
     "adonis-acl": "^1.1.1",
     "adonis-bumblebee": "^2.2.0",
+    "adonis-lucid-polymorphic": "^1.0.1",
     "mysql": "^2.18.1"
   },
   "devDependencies": {},

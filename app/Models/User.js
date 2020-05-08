@@ -25,7 +25,8 @@ class User extends Model {
   static get traits () {
     return [
       '@provider:Adonis/Acl/HasRole',
-      '@provider:Adonis/Acl/HasPermission'
+      '@provider:Adonis/Acl/HasPermission',
+      '@provider:Morphable'
     ]
   }
 
@@ -54,6 +55,11 @@ class User extends Model {
   tokens () {
     return this.hasMany('App/Models/Token')
   }
+
+  pictures(){
+    return this.morphOne('App/Models/Media', 'id', 'mediable_id', 'mediable_type')
+  }
+
 }
 
 module.exports = User

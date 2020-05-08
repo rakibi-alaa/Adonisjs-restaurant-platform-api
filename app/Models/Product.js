@@ -9,6 +9,9 @@ class Product extends Model {
 
     this.addTrait('@provider:Lucid/SoftDeletes')
   }
+  static get traits () {
+    return ['@provider:Morphable']
+  }
 
 
   user(){
@@ -21,6 +24,10 @@ class Product extends Model {
 
   restaurant(){
     return this.belongsTo('App/Models/Restaurant')
+  }
+
+  pictures(){
+    return this.morphMany('App/Models/Media', 'id', 'mediable_id', 'mediable_type')
   }
 }
 

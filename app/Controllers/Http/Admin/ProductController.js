@@ -1,13 +1,13 @@
 'use strict'
 
-const ProductService = use('App/Services/ProductService')
+const ProductService = use('App/Services/ProductService');
 
 class ProductController {
 
   async index(ctx){
     const products = await ProductService.index(ctx);
 
-    return ctx.response.json(products);
+    return ctx.transform.collection(products,'ProductTransformer');
   }
 
   async store(ctx){

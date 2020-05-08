@@ -10,6 +10,10 @@ class Restaurant extends Model {
     this.addTrait('@provider:Lucid/SoftDeletes')
   }
 
+  static get traits () {
+    return ['@provider:Morphable']
+  }
+
   products(){
     return this.hasMany('App/Models/Product')
   }
@@ -20,6 +24,10 @@ class Restaurant extends Model {
 
   user(){
     return this.belongsTo('App/Models/User')
+  }
+
+  pictures(){
+    return this.morphMany('App/Models/Media', 'id', 'mediable_id', 'mediable_type')
   }
 }
 

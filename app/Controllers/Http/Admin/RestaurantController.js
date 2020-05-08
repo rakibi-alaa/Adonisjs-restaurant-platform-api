@@ -6,14 +6,12 @@ class RestaurantController {
 
   async index(ctx){
     const restaurant = await RestaurantService.adminRestaurant(ctx);
-
     return ctx.transform.item(restaurant,'RestaurantTransformer');
   }
 
   async update(ctx){
     const restaurant = await RestaurantService.update(ctx);
-
-    return ctx.response.json(restaurant);
+    return ctx.transform.item(restaurant,'RestaurantTransformer');
   }
 
 }
