@@ -7,8 +7,9 @@
 |
 */
 
-const Helpers = use('Helpers')
-const Media = use('App/Models/Media');
+const Helpers = use('Helpers');
+const MediaService = use('App/Services/MediaService')
+
 
 class RestaurantService {
 
@@ -23,15 +24,10 @@ class RestaurantService {
       types: ['image'],
       size: '2mb'
     });
+    await MediaService.storeMedia(profilePic,restaurant,'restaurant');
 
-    await profilePic.move(Helpers.publicPath('uploads/restaurant'), {
-      name: 'custom-name.jpg',
-      overwrite: true
-    });
 
-    const media = new Media();
-    media.path = 'uploads/restaurant/custom-name.jpg';
-    media.mediable().associate(restaurant);
+
     try {
       restaurant.merge(request.all());
       await restaurant.save();
