@@ -24,7 +24,7 @@ class RestaurantService {
       types: ['image'],
       size: '2mb'
     });
-    await MediaService.storeMedia(profilePic,restaurant,'restaurant');
+    await MediaService.UpdateMedia(profilePic,restaurant,'restaurant');
 
 
 

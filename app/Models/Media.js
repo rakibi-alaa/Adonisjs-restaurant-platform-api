@@ -2,6 +2,7 @@
 
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model')
+const Drive = use('Drive')
 
 class Media extends Model {
   static get traits () {
@@ -12,6 +13,14 @@ class Media extends Model {
     return this.morphTo([
       'App/Models/Restaurant', 'App/Models/User','App/Models/Restaurant'
     ], 'id', 'id', 'mediable_id', 'mediable_type')
+  }
+
+  async deleteMedia(){
+    if(Drive.exists(this.path)){
+      await Drive.delete(this.path);
+      return true
+    }
+    return false;
   }
 }
 
