@@ -6,7 +6,7 @@ class RestaurantController {
 
   async index(ctx){
     const restaurant = await RestaurantService.adminRestaurant(ctx);
-    return ctx.transform.item(restaurant,'RestaurantTransformer');
+    return ctx.transform.include('pictures').item(restaurant,'RestaurantTransformer');
   }
 
   async update(ctx){
