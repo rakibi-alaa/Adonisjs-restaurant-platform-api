@@ -7,7 +7,7 @@
 |
 */
 
-const Helpers = use('Helpers');
+
 const MediaService = use('App/Services/MediaService')
 
 
@@ -27,16 +27,16 @@ class RestaurantService {
     await MediaService.UpdateMedia(profilePic,restaurant,'restaurant');
 
 
-
     try {
       restaurant.merge(request.all());
       await restaurant.save();
       return restaurant;
     }catch (e) {
-      console.log(e)
+      console.log(e);
+      return false
     }
   }
 
 }
 
-module.exports = RestaurantService
+module.exports = RestaurantService;

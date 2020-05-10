@@ -11,7 +11,7 @@ class Media extends Model {
 
   mediable(){
     return this.morphTo([
-      'App/Models/Restaurant', 'App/Models/User','App/Models/Restaurant'
+      'App/Models/Restaurant', 'App/Models/User','App/Models/Product'
     ], 'id', 'id', 'mediable_id', 'mediable_type')
   }
 

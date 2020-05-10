@@ -28,12 +28,21 @@ Route.post('/auth/login','AuthController.login');
 
 Route.group(() => {
   Route.post('/register', 'AuthController.register').validator('StoreUser');
+  /*
+  * restaurant management roues for the admin
+  * */
   Route.get('/restaurant', 'RestaurantController.index');
   Route.patch('/restaurant', 'RestaurantController.update');
+  /*
+  * orders management roues for the admin
+  * */
   Route.get('/orders', 'OrderController.index');
+  /*
+  * Products management roues for the admin
+  * */
   Route.get('/products', 'ProductController.index');
   Route.post('/products', 'ProductController.store');
-  Route.patch('/products', 'ProductController.update');
-  Route.delete('/products', 'ProductController.delete');
+  Route.patch('/product', 'ProductController.update');
+  Route.delete('/product', 'ProductController.delete');
 
 }).namespace('Admin').prefix('api/v1/admin').middleware(['auth', 'is:admin']);

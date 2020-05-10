@@ -11,7 +11,16 @@ class RestaurantController {
 
   async update(ctx){
     const restaurant = await RestaurantService.update(ctx);
-    return ctx.transform.item(restaurant,'RestaurantTransformer');
+    if(restaurant){
+      return ctx.transform.include('pictures').item(restaurant,'RestaurantTransformer');
+    }else{
+      return ctx.response.json({
+        error : {
+          message : 'error while updating restaurant information :/ !!'
+        }
+      })
+    }
+
   }
 
 }

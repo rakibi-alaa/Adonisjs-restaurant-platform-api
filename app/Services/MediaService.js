@@ -30,7 +30,8 @@ class MediaService {
 
     const mediaDirectoryPath = 'uploads/' + directory;
     let mediaHashedName = await Hash.make('media'+ new Date().getTime());
-    mediaHashedName = mediaHashedName.replace(/[\./]/g,'') ;
+    mediaHashedName = mediaHashedName.replace(/[\./]/g,'');
+
     let filenames = [];
     if(picture._files){
       picture._files.map(async (picture,index) => {
@@ -54,13 +55,13 @@ class MediaService {
         filenames.map(async (file) =>{
           const media = new Media();
           media.path = mediaDirectoryPath+'/' +file;
-          media.mediable().associate(modelInstance);
+          await media.mediable().associate(modelInstance);
         });
         return true;
       }else{
         const media = new Media();
         media.path = mediaDirectoryPath+'/' +mediaHashedName;
-        media.mediable().associate(modelInstance);
+        await media.mediable().associate(modelInstance);
         return true;
       }
 
@@ -82,7 +83,9 @@ class MediaService {
     let mediaHashedName = await Hash.make('media'+ new Date().getTime());
     mediaHashedName = mediaHashedName.replace(/[\./]/g,'') ;
     let filenames = [];
+
     if(picture._files){
+
       picture._files.map(async (picture,index) => {
         const finalName  = mediaHashedName + index +'.'+ picture.subtype;
         filenames.push(finalName);
@@ -92,6 +95,7 @@ class MediaService {
           overwrite: true
         });
       });
+
     }else {
       mediaHashedName = mediaHashedName +'.'+ picture.subtype;
       await picture.move(Helpers.publicPath(mediaDirectoryPath), {
@@ -102,17 +106,20 @@ class MediaService {
 
 
     try{
+
       if(picture._files){
+
         filenames.map(async (file) =>{
           const media = new Media();
           media.path = mediaDirectoryPath+'/' +file;
-          media.mediable().associate(modelInstance);
+          await media.mediable().associate(modelInstance);
         });
         return true;
+
       }else{
         const media = new Media();
         media.path = mediaDirectoryPath+'/' +mediaHashedName;
-        media.mediable().associate(modelInstance);
+        await media.mediable().associate(modelInstance);
         return true;
       }
 

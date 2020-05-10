@@ -5,21 +5,21 @@ const ProductService = use('App/Services/ProductService');
 class ProductController {
 
   async index(ctx){
-    const products = await ProductService.index(ctx);
+    const products = await ProductService.restaurantProducts(ctx);
 
-    return ctx.transform.collection(products,'ProductTransformer');
+    return ctx.transform.include('pictures').collection(products,'ProductTransformer');
   }
 
   async store(ctx){
-    const restaurant = await ProductService.store(ctx);
+    const newProduct = await ProductService.store(ctx);
 
-    return ctx.response.json(restaurant);
+    return ctx.transform.include('pictures').item(newProduct,'ProductTransformer');
   }
 
   async update(ctx){
-    const restaurant = await ProductService.update(ctx);
+    const product = await ProductService.update(ctx);
 
-    return ctx.response.json(restaurant);
+    return ctx.transform.include('pictures').item(product,'ProductTransformer');
   }
 
   async delete(ctx){
