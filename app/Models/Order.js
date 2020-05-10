@@ -4,6 +4,7 @@
 const Model = use('Model')
 
 class Order extends Model {
+
   static boot () {
     super.boot()
 

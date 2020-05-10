@@ -26,7 +26,6 @@ class RestaurantService {
     });
     await MediaService.UpdateMedia(profilePic,restaurant,'restaurant');
 
-
     try {
       restaurant.merge(request.all());
       await restaurant.save();

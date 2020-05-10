@@ -47,7 +47,45 @@ class ProductService {
     }
   }
 
+  static async update({request}){
+    const {id,title,description,price} = request.all();
+    const product = await Product.find(id);
 
+    try {
+      product.title = title;
+      product.description = description;
+      product.price = price;
+      await product.save();
+      const picture = request.file('picture', {
+        types: ['image'],
+        size: '2mb'
+      });
+      if(picture){
+        await MediaService.UpdateMedia(picture,product,'products');
+      }
+
+      return product;
+    }catch (e) {
+      console.log(e);
+      return false;
+    }
+
+
+  }
+
+
+
+  static async delete({request}){
+
+    const product = await Product.find(request.all().id);
+    try {
+      await product.delete()
+      return true;
+    }catch (e) {
+      console.log(e)
+      return false
+    }
+  }
 
 }
 
