@@ -23,21 +23,27 @@ class OrderService {
   }
 
   static async store({request,auth}){
-    const {title,description,price} = request.all();
-
-
-    const picture = request.file('picture', {
-      types: ['image'],
-      size: '2mb'
-    });
+    const {products,phone} = request.all();
+    const user = await auth.user;
     try{
-      //await auth.user.products().save(product);
+      const order = new Order();
+      order.customer_full_name = user.username;
+      order.customer_email = user.email;
+      order.customer_phone = phone;
 
-      if(picture){
-        const stored =  await MediaService.storeMedia(picture,product ,'products');
-        console.log(stored)
-      }
-      return product;
+      await order.restaurant().associate(await auth.user.restaurant().fetch());
+      await order.user().associate(user);
+
+      products.map(async (product) => {
+        await order.products().attach(product.id,(order_product)=>{
+          order_product.product_title = product.title;
+          order_product.product_quantity = product.quantity;
+          order_product.product_price = product.price;
+        })
+      });
+
+
+      return this.restaurantOrder(order.id);
     }catch (e) {
       console.log(e);
       return false;
@@ -49,7 +55,6 @@ class OrderService {
     const order = await Order.find(id);
 
     try {
-
       const picture = request.file('picture', {
         types: ['image'],
         size: '2mb'
@@ -57,14 +62,11 @@ class OrderService {
       if(picture){
         //await MediaService.UpdateMedia(picture,product,'products');
       }
-
       return order
     }catch (e) {
       console.log(e);
       return false;
     }
-
-
   }
 
 

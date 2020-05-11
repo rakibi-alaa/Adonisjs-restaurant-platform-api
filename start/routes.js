@@ -37,6 +37,7 @@ Route.group(() => {
   * orders management roues for the admin
   * */
   Route.get('/orders', 'OrderController.index');
+  Route.post('/orders', 'OrderController.store');
   /*
   * Products management roues for the admin
   * */
