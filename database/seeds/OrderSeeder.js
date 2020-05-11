@@ -23,7 +23,7 @@ class OrderSeeder {
     const user = await User.first();
     const restaurant = await Restaurant.first();
 
-    await Factory.model('App/Models/Order').createMany(1,{user_id : user.id,restaurant_id : restaurant.id});
+    await Factory.model('App/Models/Order').createMany(15,{user_id : user.id,restaurant_id : restaurant.id});
 
     const order = await Order.last();
     const product = await Product.first();

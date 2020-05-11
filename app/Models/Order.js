@@ -22,6 +22,21 @@ class Order extends Model {
   user(){
     return this.belongsTo('App/Models/User')
   }
+
+  async getOrderTotal(){
+
+    let total = 0;
+
+    let orderProducts = await this.products().fetch();
+
+    if(orderProducts.rows.length > 0){
+      orderProducts.rows.map((orderProduct,index)=>{
+        orderProduct = orderProduct.toJSON();
+        total += ( orderProduct.pivot.product_price * orderProduct.pivot.product_quantity);
+      });
+    }
+    return total;
+  }
 }
 
 module.exports = Order
