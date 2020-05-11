@@ -23,13 +23,13 @@ class OrderService {
   }
 
   static async store({request,auth}){
-    const {products,phone} = request.all();
+    const {products} = request.all();
     const user = await auth.user;
     try{
       const order = new Order();
       order.customer_full_name = user.username;
       order.customer_email = user.email;
-      order.customer_phone = phone;
+      order.customer_phone = user.email;
 
       await order.restaurant().associate(await auth.user.restaurant().fetch());
       await order.user().associate(user);

@@ -5,6 +5,7 @@ class StoreUser {
     return {
       'username': 'required|unique:users',
       'email': 'required|unique:users',
+      'phone': 'required|string',
       'password': 'required|confirmed',
       'password_confirmation': 'required',
     }
