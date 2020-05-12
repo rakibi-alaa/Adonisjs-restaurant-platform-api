@@ -7,7 +7,7 @@
 |
 */
 
-const MediaService = use('App/Services/MediaService')
+const Status = use('App/Models/Status')
 const Order = use('App/Models/Order');
 
 class OrderService {
@@ -33,6 +33,7 @@ class OrderService {
 
       await order.restaurant().associate(await auth.user.restaurant().fetch());
       await order.user().associate(user);
+      await order.status().associate(await Status.findBy('status','pending'));
 
       products.map(async (product) => {
         await order.products().attach(product.id,(order_product)=>{
@@ -49,11 +50,11 @@ class OrderService {
     }
   }
 
-  static async update({request}){
-    const {id,status} = request.all();
+  static async updateOrderStatus({request}){
+    const {order_id,status} = request.all();
     try {
-      const order = await Order.find(id);
-      const orderStatus = await Status.findBy('status',status);
+      const order = await this.restaurantOrder(order_id);
+      const ordserStatus = await Status.findBy('status',status);
       await order.status().associate(orderStatus);
 
       return order;

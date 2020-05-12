@@ -38,6 +38,7 @@ Route.group(() => {
   * */
   Route.get('/orders', 'OrderController.index');
   Route.post('/orders', 'OrderController.store');
+  Route.patch('/orderstatus', 'OrderController.updateStatus');
   /*
   * Products management roues for the admin
   * */

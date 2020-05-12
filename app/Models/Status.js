@@ -10,7 +10,9 @@ class Status extends Model {
     this.addTrait('@provider:Lucid/SoftDeletes');
   }
 
-
+  orders(){
+    return this.belongsTo('App/Models/Order')
+  }
 }
 
 module.exports = Status;

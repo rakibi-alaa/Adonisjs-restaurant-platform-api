@@ -24,7 +24,7 @@ class Order extends Model {
   }
 
   status(){
-    return this.belongsTo('App/models/Status');
+    return this.belongsTo('App/Models/Status');
   }
 
   async getOrderTotal(){

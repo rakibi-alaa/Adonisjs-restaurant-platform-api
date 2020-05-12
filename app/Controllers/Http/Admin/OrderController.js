@@ -21,6 +21,20 @@ class OrderController {
     }
 
   }
+
+  async updateStatus(ctx){
+    const order = await OrderService.updateOrderStatus(ctx);
+    if(order){
+      return ctx.transform.include(['status','products']).item(order,'OrderTransformer');
+    }else{
+      return ctx.response.json({
+        error : {
+          message : 'Something happened when placing your order :/ !!'
+        }
+      })
+    }
+
+  }
 }
 
 module.exports = OrderController;
