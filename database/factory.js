@@ -33,8 +33,6 @@
   });
 
   Factory.blueprint('App/Models/Restaurant',  async (faker,i,data) => {
-
-
     return {
       name: faker.word(),
       email : faker.email(),
@@ -46,7 +44,6 @@
       user_id : data.user_id,
     }
   });
-
 
   Factory.blueprint('App/Models/Product',  (faker,i,data) => {
     return {
@@ -62,7 +59,17 @@
       customer_full_name:  faker.prefix()+ faker.name({ nationality: 'en' }),
       customer_email : faker.email(),
       customer_phone: faker.phone({ country: "fr" }),
+      status_id : faker.integer({ min: 1, max: 3 }) ,
       user_id : data.user_id,
       restaurant_id : data.restaurant_id
     }
   });
+
+  Factory.blueprint('App/Models/Status', (faker,i,data) => {
+    return {
+      status:  data.status,
+      color : data.color,
+    }
+  });
+
+

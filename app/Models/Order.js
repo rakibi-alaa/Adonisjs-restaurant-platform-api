@@ -23,6 +23,10 @@ class Order extends Model {
     return this.belongsTo('App/Models/User')
   }
 
+  status(){
+    return this.hasOne('App/models/Status');
+  }
+
   async getOrderTotal(){
 
     let total = 0;

@@ -12,8 +12,9 @@ class OrderSchema extends Schema {
       table.string('customer_phone');
       table.integer('user_id').unsigned().references('id').inTable('users');
       table.integer('restaurant_id').unsigned().references('id').inTable('restaurants');
+      table.integer('status_id').unsigned().references('id').inTable('statuses');
       table.timestamps();
-      table.timestamp('deleted_at')
+      table.timestamp('deleted_at');
     })
   }
 
@@ -22,4 +23,4 @@ class OrderSchema extends Schema {
   }
 }
 
-module.exports = OrderSchema
+module.exports = OrderSchema;

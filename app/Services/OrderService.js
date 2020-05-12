@@ -42,7 +42,6 @@ class OrderService {
         })
       });
 
-
       return this.restaurantOrder(order.id);
     }catch (e) {
       console.log(e);
@@ -51,18 +50,13 @@ class OrderService {
   }
 
   static async update({request}){
-    const {id,title,description,price} = request.all();
-    const order = await Order.find(id);
-
+    const {id,status} = request.all();
     try {
-      const picture = request.file('picture', {
-        types: ['image'],
-        size: '2mb'
-      });
-      if(picture){
-        //await MediaService.UpdateMedia(picture,product,'products');
-      }
-      return order
+      const order = await Order.find(id);
+      const orderStatus = await Status.findBy('status',status);
+      await order.status().associate(orderStatus);
+
+      return order;
     }catch (e) {
       console.log(e);
       return false;
