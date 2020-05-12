@@ -1,7 +1,7 @@
 'use strict'
 
 const BumblebeeTransformer = use('Bumblebee/Transformer')
-const OrderService = use('App/Services/OrderService')
+
 /**
  * OrderTransformer class
  *
@@ -12,6 +12,13 @@ class OrderTransformer extends BumblebeeTransformer {
   /**
    * This method is used to transform the data.
    */
+  static get availableInclude() {
+    return [
+      'products',
+      'status'
+    ]
+  }
+
   async transform (model) {
     return {
       id : model.id,
@@ -19,10 +26,18 @@ class OrderTransformer extends BumblebeeTransformer {
       customer_email : model.customer_email,
       customer_phone : model.customer_phone,
       placed_by : model.user_id,
-      //total : await OrderService.getOrderTotal(model.id)
       total : await model.getOrderTotal()
 
     }
+  }
+  includeProducts(restaurant) {
+    return this.collection(restaurant.getRelated('products'),'ProductTransformer')
+  }
+  includeStatus(restaurant) {
+    return this.item(restaurant.getRelated('status'),status => ({
+      status : status.status,
+      color : status.color,
+    }))
   }
 }
 
