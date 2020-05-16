@@ -4,6 +4,7 @@
 const Model = use('Model')
 
 class Restaurant extends Model {
+  //restaurant model
   static boot () {
     super.boot()
 
