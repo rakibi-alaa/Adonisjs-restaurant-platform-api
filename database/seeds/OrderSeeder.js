@@ -11,11 +11,11 @@
 */
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
-const Factory = use('Factory')
-const User = use('App/Models/User')
-const Restaurant = use('App/Models/Restaurant')
-const Order = use('App/Models/Order')
-const Product = use('App/Models/Product')
+const Factory = use('Factory');
+const User = use('App/Models/User');
+const Restaurant = use('App/Models/Restaurant');
+const Order = use('App/Models/Order');
+const Product = use('App/Models/Product');
 
 
 class OrderSeeder {

@@ -8,7 +8,7 @@ class Order extends Model {
   static boot () {
     super.boot()
 
-    this.addTrait('@provider:Lucid/SoftDeletes')
+    this.addTrait('@provider:Lucid/SoftDeletes');
   }
 
   products(){
@@ -16,11 +16,11 @@ class Order extends Model {
   }
 
   restaurant(){
-    return this.belongsTo('App/Models/Restaurant')
+    return this.belongsTo('App/Models/Restaurant');
   }
 
   user(){
-    return this.belongsTo('App/Models/User')
+    return this.belongsTo('App/Models/User');
   }
 
   status(){

@@ -25,6 +25,7 @@ class OrderService {
   static async store({request,auth}){
     const {products} = request.all();
     const user = await auth.user;
+
     try{
       const order = new Order();
       order.customer_full_name = user.username;

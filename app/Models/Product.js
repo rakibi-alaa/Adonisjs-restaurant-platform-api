@@ -15,7 +15,7 @@ class Product extends Model {
 
 
   user(){
-    return this.belongsTo('App/Models/User')
+    return this.belongsTo('App/Models/User');
   }
 
   orders(){
@@ -23,11 +23,11 @@ class Product extends Model {
   }
 
   restaurant(){
-    return this.belongsTo('App/Models/Restaurant')
+    return this.belongsTo('App/Models/Restaurant');
   }
 
   pictures(){
-    return this.morphMany('App/Models/Media', 'id', 'mediable_id', 'mediable_type')
+    return this.morphMany('App/Models/Media', 'id', 'mediable_id', 'mediable_type');
   }
 }
 
