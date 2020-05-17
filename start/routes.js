@@ -25,22 +25,22 @@ Route.get('/', () => {
 
 
 Route.post('/auth/login','AuthController.login');
+Route.post('/auth/register', 'AuthController.register').validator('StoreUser');
 
 Route.group(() => {
-  Route.post('/register', 'AuthController.register').validator('StoreUser');
   /*
-  * restaurant management roues for the admin
+  * restaurant management routes for the admin
   * */
   Route.get('/restaurant', 'RestaurantController.index');
   Route.patch('/restaurant', 'RestaurantController.update');
   /*
-  * orders management roues for the admin
+  * orders management routes for the admin
   * */
   Route.get('/orders', 'OrderController.index');
   Route.post('/orders', 'OrderController.store');
   Route.patch('/orderstatus', 'OrderController.updateStatus');
   /*
-  * Products management roues for the admin
+  * Products management routes for the admin
   * */
   Route.get('/products', 'ProductController.index');
   Route.post('/products', 'ProductController.store');

@@ -1,7 +1,7 @@
 'use strict'
 
 const User = use('App/Models/User');
-
+const UserService = use('App/Services/UserService');
 class AuthController {
 
   async login({request,response,auth}) {
@@ -21,8 +21,17 @@ class AuthController {
   }
 
 
-  async register({reauest,response}){
-
+  async register(ctx){
+    const data = await UserService.registerCustomer(ctx);
+    if(data.error){
+      return ctx.response.json({
+        error : data.errorDetail
+      })
+    }else{
+      return ctx.response.json({
+        customer : data
+      })
+    }
   }
 
 }

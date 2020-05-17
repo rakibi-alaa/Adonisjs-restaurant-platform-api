@@ -16,19 +16,20 @@ const Role = use('Adonis/Acl/Role');
 
 class UserService {
 
-  static async registerAdmin({request}){
-    const adminRole = await Role.find(1);
+  static async registerCustomer({request}){
+    console.log('123456789');
+    const customerRole = await Role.find(1);
     const {username,email,password,phone} = request.all();
 
     try {
-      const admin = new User();
-      admin.username = username;
-      admin.email = email;
-      admin.password = password;
-      admin.phone = phone;
-      await admin.save();
-      await admin.roles().attach([adminRole.id]);
-      return admin.toJSON();
+      const customer = new User();
+      customer.username = username;
+      customer.email = email;
+      customer.password = password;
+      customer.phone = phone;
+      await customer.save();
+      await customer.roles().attach([customerRole.id]);
+      return customer.toJSON();
     }catch (error) {
       console.log(error);
       return {
