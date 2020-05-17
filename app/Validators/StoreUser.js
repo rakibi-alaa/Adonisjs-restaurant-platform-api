@@ -20,7 +20,7 @@ class StoreUser {
   }
 
   async fails(error) {
-    this.ctx.response.json(error);
+    this.ctx.response.json({validationError:error});
   }
 }
 

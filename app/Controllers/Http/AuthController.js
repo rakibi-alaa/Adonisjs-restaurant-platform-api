@@ -4,7 +4,7 @@ const User = use('App/Models/User');
 const UserService = use('App/Services/UserService');
 class AuthController {
 
-  async login({request,response,auth}) {
+  async login({request,response,auth,transform}) {
     const {email, password} = request.all();
     try {
       const token = await auth.withRefreshToken().attempt(email, password);
@@ -12,7 +12,7 @@ class AuthController {
       const roles = await user.getRoles();
       return response.json({
         ...token,
-        user : user.toJSON(),
+        user : user,
         role : roles
       })
     }catch (e) {
@@ -22,16 +22,15 @@ class AuthController {
 
 
   async register(ctx){
-    const data = await UserService.registerCustomer(ctx);
-    if(data.error){
-      return ctx.response.json({
-        error : data.errorDetail
-      })
-    }else{
-      return ctx.response.json({
-        customer : data
-      })
-    }
+    const customer = await UserService.registerCustomer(ctx);
+    const token = await ctx.auth.withRefreshToken().attempt(customer.email, ctx.request.all().password);
+    const roles = await customer.getRoles();
+    return ctx.response.json({
+      user : customer,
+      ...token,
+      role : roles
+    })
+
   }
 
 }

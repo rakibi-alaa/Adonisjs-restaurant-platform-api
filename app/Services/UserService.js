@@ -17,8 +17,8 @@ const Role = use('Adonis/Acl/Role');
 class UserService {
 
   static async registerCustomer({request}){
-    console.log('123456789');
-    const customerRole = await Role.find(1);
+
+    const customerRole = await Role.findBy('name','Customer');
     const {username,email,password,phone} = request.all();
 
     try {
@@ -29,7 +29,7 @@ class UserService {
       customer.phone = phone;
       await customer.save();
       await customer.roles().attach([customerRole.id]);
-      return customer.toJSON();
+      return customer;
     }catch (error) {
       console.log(error);
       return {
