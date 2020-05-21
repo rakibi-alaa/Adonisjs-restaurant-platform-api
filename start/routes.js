@@ -26,6 +26,7 @@ Route.get('/', () => {
 
 Route.post('/auth/login','AuthController.login');
 Route.post('/auth/register', 'AuthController.register').validator('StoreUser');
+Route.post('/auth/refresh', 'AuthController.refreshToken');
 
 Route.group(() => {
   /*
